@@ -1,0 +1,6 @@
+batch_id,total_in_batch,skipped_already_done,segmentation_ok,segmentation_low_confidence,segmentation_failed_or_error
+batch_001,450,0,303,147,0
+batch_002,450,0,295,155,0
+batch_003,450,0,294,156,0
+batch_004,450,0,310,140,0
+batch_005,450,0,303,146,1

@@ -1,0 +1,31 @@
+{
+  "total_files_scanned": 2250,
+  "valid_images": 2250,
+  "corrupt_or_unsupported": 0,
+  "exact_duplicates": 0,
+  "near_duplicate_clusters_dhash_le_3": 10,
+  "unique_leakage_groups": 2186,
+  "missing_labels": 0,
+  "missing_expected_catalog_ids": 0,
+  "extensions": {
+    ".jpg": 2250
+  },
+  "dimensions": {
+    "1180x784": 2250
+  },
+  "exif_timestamp_count": 0,
+  "categories_total": 45,
+  "stability_distribution_categories": {
+    "Stable": 28,
+    "Unstable": 17
+  },
+  "air_flow_distribution_categories": {
+    "18": 15,
+    "10": 13,
+    "5": 13,
+    "Unknown": 3,
+    "0": 1
+  },
+  "froth_depth_available": false,
+  "video_velocity_metadata_available": false
+}

@@ -1,0 +1,102 @@
+{
+  "metadata_identification": {
+    "stable_category_count": 28,
+    "stable_category_ids": [
+      1,
+      2,
+      4,
+      10,
+      11,
+      12,
+      13,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      33,
+      36,
+      37,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44
+    ],
+    "heldout_unstable_category_count": 17,
+    "heldout_unstable_category_ids": [
+      3,
+      5,
+      6,
+      7,
+      8,
+      9,
+      14,
+      15,
+      28,
+      29,
+      30,
+      31,
+      32,
+      34,
+      35,
+      38,
+      45
+    ],
+    "stable_train_val_images": 1158,
+    "stable_test_images": 242,
+    "heldout_unstable_images": 850
+  },
+  "experiment_1_closed_set_stable": {
+    "accuracy": 0.8678,
+    "macro_f1": 0.8333,
+    "note": "Closed-set classifier trained only on Stable categories cannot name unseen Unstable categories."
+  },
+  "experiment_2_heldout_unsteady_novelty_detection": {
+    "predictive_uncertainty_1_minus_max_prob": {
+      "auroc": 0.7579,
+      "auprc": 0.9003,
+      "tpr_at_5pct_fpr": 0.1635,
+      "threshold_95pct_in_dist": 0.6833
+    },
+    "normalized_predictive_entropy": {
+      "auroc": 0.7636,
+      "auprc": 0.8993,
+      "tpr_at_5pct_fpr": 0.1612,
+      "threshold_95pct_in_dist": 0.578
+    },
+    "feature_mahalanobis_distance": {
+      "auroc": 0.6834,
+      "auprc": 0.8471,
+      "tpr_at_5pct_fpr": 0.0588,
+      "threshold_95pct_in_dist": 239.6019
+    },
+    "isolation_forest_score": {
+      "auroc": 0.6366,
+      "auprc": 0.7933,
+      "tpr_at_5pct_fpr": 0.0012,
+      "threshold_95pct_in_dist": 0.0949
+    },
+    "combined_novelty_score": {
+      "auroc": 0.7701,
+      "auprc": 0.9122,
+      "tpr_at_5pct_fpr": 0.3482,
+      "threshold_95pct_in_dist": 0.6129
+    },
+    "in_dist_mean_novelty": 0.3388,
+    "heldout_unsteady_mean_novelty": 0.5222
+  },
+  "experiment_3_cross_category_stability_5fold_groupcv": {
+    "accuracy": 0.7556,
+    "macro_f1": 0.7437,
+    "unstable_f1": 0.6886
+  }
+}

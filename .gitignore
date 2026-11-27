@@ -1,0 +1,10 @@
+# Exclude raw source archive duplicates and training checkpoints
+data_original/
+models/cnn_checkpoint_last.pt
+
+# Exclude Python & test caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+outputs/batch_analysis_*.csv
+.env

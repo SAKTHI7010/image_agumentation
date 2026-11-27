@@ -1,0 +1,11 @@
+{
+  "total_rows": 2250,
+  "unique_images": 2250,
+  "segmentation_status_counts": {
+    "ok": 1505,
+    "low_confidence": 744,
+    "failed": 1
+  },
+  "velocity_available_count": 0,
+  "processed_in_this_run": 2250
+}

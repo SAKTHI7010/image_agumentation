@@ -1,0 +1,18 @@
+category_id,category,mineral_used,air_flow_raw,quality,sample_count,mean_uncertainty,mean_mahalanobis,mean_novelty_score,drift_flag_rate,mean_visual_stability_proxy
+3,Category 3,Sample 1,Unknown,Inadequate,50,0.3762,116.3404,0.5561,0.3,0.6919
+5,Category 5,Sample 1,10,Indeterminate,50,0.4773,16.5256,0.3094,0.0,0.6439
+6,Category 6,Sample 1,5,Indeterminate,50,0.5703,21.1415,0.3756,0.0,0.6425
+7,Category 7,Sample 1,18,Adequate,50,0.6092,68.4203,0.5966,0.46,0.6594
+8,Category 8,Sample 1,10,Indeterminate,50,0.5897,74.3007,0.6061,0.48,0.6318
+9,Category 9,Sample 1,5,Inadequate,50,0.7077,76.5871,0.6765,0.74,0.6651
+14,Category 14,Sample 1,10,Indeterminate,50,0.5884,28.0706,0.4143,0.06,0.658
+15,Category 15,Sample 1,5,Inadequate,50,0.6359,24.639,0.4233,0.06,0.6751
+28,Category 28,70% Sample 1 + 30% Sample 3,10,Adequate,50,0.2439,48.4722,0.3244,0.02,0.6656
+29,Category 29,70% Sample 1 + 30% Sample 3,5,Adequate,50,0.2727,171.3967,0.5208,0.36,0.6651
+30,Category 30,70% Sample 1 + 30% Sample 3,18,Inadequate,50,0.4623,236.5965,0.7312,0.96,0.6604
+31,Category 31,70% Sample 1 + 30% Sample 3,10,Inadequate,50,0.5137,222.4383,0.7568,1.0,0.6686
+32,Category 32,70% Sample 1 + 30% Sample 3,5,Inadequate,50,0.5474,111.6694,0.698,0.84,0.6672
+34,Category 34,Sample 1,10,Indeterminate,50,0.6263,29.206,0.4381,0.06,0.6509
+35,Category 35,Sample 1,5,Inadequate,50,0.5562,75.309,0.5416,0.24,0.6606
+38,Category 38,Sample 1,5,Indeterminate,50,0.5289,29.6227,0.3912,0.0,0.6427
+45,Category 45,Complex Mineralogy,5,Inadequate,50,0.4362,75.1369,0.5182,0.34,0.7014

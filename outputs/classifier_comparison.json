@@ -1,0 +1,108 @@
+{
+  "split_counts": {
+    "train": 1583,
+    "test": 357,
+    "val": 310
+  },
+  "leakage_prevention": "StratifiedGroupKFold grouped by near-duplicate dHash clusters (leakage_group_id)",
+  "random_forest_45class": {
+    "accuracy": 0.8487,
+    "macro_f1": 0.815,
+    "weighted_f1": 0.8453,
+    "num_test_samples": 357,
+    "train_time_sec": 4.71
+  },
+  "mobilenet_v2_45class": {
+    "accuracy": 0.9636,
+    "macro_f1": 0.9622,
+    "weighted_f1": 0.9626,
+    "num_test_samples": 357,
+    "train_time_sec": 508.4,
+    "best_epoch": 5,
+    "history": [
+      {
+        "epoch": 1,
+        "train_loss": 1.8488,
+        "val_accuracy": 0.8419,
+        "val_macro_f1": 0.8252
+      },
+      {
+        "epoch": 2,
+        "train_loss": 0.7054,
+        "val_accuracy": 0.9,
+        "val_macro_f1": 0.8956
+      },
+      {
+        "epoch": 3,
+        "train_loss": 0.457,
+        "val_accuracy": 0.9548,
+        "val_macro_f1": 0.9549
+      },
+      {
+        "epoch": 4,
+        "train_loss": 0.3365,
+        "val_accuracy": 0.9516,
+        "val_macro_f1": 0.9495
+      },
+      {
+        "epoch": 5,
+        "train_loss": 0.2633,
+        "val_accuracy": 0.9677,
+        "val_macro_f1": 0.9677
+      },
+      {
+        "epoch": 6,
+        "train_loss": 0.2207,
+        "val_accuracy": 0.9677,
+        "val_macro_f1": 0.967
+      }
+    ]
+  },
+  "random_forest_stability_within_split": {
+    "accuracy": 0.944,
+    "macro_f1": 0.9349,
+    "unstable_f1": 0.9107
+  },
+  "top_10_rf_features": [
+    {
+      "feature": "lab_b_mean",
+      "importance": 0.04742488089321098
+    },
+    {
+      "feature": "lab_b_std",
+      "importance": 0.039712174457643655
+    },
+    {
+      "feature": "glcm_homogeneity",
+      "importance": 0.03875528771272943
+    },
+    {
+      "feature": "s_std",
+      "importance": 0.03869531282509818
+    },
+    {
+      "feature": "glcm_energy",
+      "importance": 0.03836219673504066
+    },
+    {
+      "feature": "lab_a_std",
+      "importance": 0.036123938191307776
+    },
+    {
+      "feature": "sobel_mag_std",
+      "importance": 0.03525134496651646
+    },
+    {
+      "feature": "glcm_correlation",
+      "importance": 0.03435423378214382
+    },
+    {
+      "feature": "sobel_mag_mean",
+      "importance": 0.03409782776977326
+    },
+    {
+      "feature": "laplacian_var",
+      "importance": 0.03390916426298965
+    }
+  ]
+}

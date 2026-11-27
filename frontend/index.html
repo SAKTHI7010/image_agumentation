@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project 7 · Froth Image Analysis &amp; Flotation Monitoring</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo-dot"></div>
+      <div>
+        <h1>Project 7 · Froth Image Analysis</h1>
+        <p class="subtitle">Flotation Operating State, Stability &amp; Drift Monitoring Prototype</p>
+      </div>
+    </div>
+    <div class="header-badges" id="headerBadges">
+      <span class="badge">Loading status...</span>
+    </div>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab-btn active" data-tab="inspector">Single Image Inspector</button>
+    <button class="tab-btn" data-tab="batch">Incremental Batch Runner</button>
+    <button class="tab-btn" data-tab="benchmarks">Model Benchmarks &amp; Drift Report</button>
+  </nav>
+
+  <main class="container">
+    <!-- TAB 1: SINGLE IMAGE INSPECTOR -->
+    <section id="tab-inspector" class="tab-panel active">
+      <div class="grid-2">
+        <div class="card">
+          <h2>1. Input Froth Image</h2>
+          <div class="upload-box">
+            <label for="fileInput" class="file-label">Upload a Froth Image (.jpg, .png, .bmp, .tif)</label>
+            <div class="row-actions">
+              <input type="file" id="fileInput" accept=".jpg,.jpeg,.png,.bmp,.tif,.tiff,.webp" />
+              <button id="uploadBtn" class="btn primary">Analyze Upload</button>
+            </div>
+          </div>
+
+          <hr class="divider" />
+
+          <div class="local-selector">
+            <h3>Or Select from Local Dataset Batches</h3>
+            <div class="filter-row">
+              <select id="batchFilter">
+                <option value="all">All Batches</option>
+                <option value="batch_001">batch_001</option>
+                <option value="batch_002">batch_002</option>
+                <option value="batch_003">batch_003</option>
+                <option value="batch_004">batch_004</option>
+                <option value="batch_005">batch_005</option>
+              </select>
+              <select id="stabilityFilter">
+                <option value="all">All Stability</option>
+                <option value="Stable">Stable (28 cats)</option>
+                <option value="Unstable">Unstable (17 cats)</option>
+              </select>
+              <select id="categoryFilter">
+                <option value="">All 45 Categories</option>
+              </select>
+              <button id="refreshSamplesBtn" class="btn">Filter</button>
+            </div>
+            <div id="sampleGallery" class="sample-gallery"></div>
+          </div>
+
+          <div class="preview-wrap" id="previewWrap" style="display:none;">
+            <h3>Selected Image Preview</h3>
+            <img id="previewImg" alt="Froth preview" />
+            <div id="groundTruthMeta" class="meta-strip"></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>2. Prediction, Stability &amp; Drift Diagnostics</h2>
+          <div id="errorBanner" class="alert error" style="display:none;"></div>
+          <div id="driftBanner" class="alert" style="display:none;"></div>
+          <div id="predictionPlaceholder" class="muted">Upload an image or click a dataset sample on the left to inspect predictions, visual features, and Project 3 adapter output.</div>
+
+          <div id="predictionResults" style="display:none;">
+            <div class="kpi-grid">
+              <div class="kpi">
+                <span class="kpi-label">Random Forest Condition</span>
+                <strong id="kpiRfCat">-</strong>
+                <small id="kpiRfConf">-</small>
+              </div>
+              <div class="kpi">
+                <span class="kpi-label">MobileNetV2 CNN</span>
+                <strong id="kpiCnnCat">-</strong>
+                <small id="kpiCnnConf">-</small>
+              </div>
+              <div class="kpi">
+                <span class="kpi-label">Froth Stability</span>
+                <strong id="kpiStability">-</strong>
+                <small id="kpiStabScore">-</small>
+              </div>
+              <div class="kpi">
+                <span class="kpi-label">Est. Air Flow / Proxy</span>
+                <strong id="kpiAirFlow">-</strong>
+                <small id="kpiProxy">-</small>
+              </div>
+            </div>
+
+            <div class="subgrid-2">
+              <div class="subcard">
+                <h4>Top-3 Operating Categories</h4>
+                <div id="top3List"></div>
+              </div>
+              <div class="subcard">
+                <h4>Uncertainty &amp; Novelty</h4>
+                <div id="uncertaintyStats"></div>
+              </div>
+            </div>
+
+            <div class="subcard">
+              <h4>Extracted Visual Features (Watershed + Colour + Texture)</h4>
+              <div id="visualFeaturesGrid" class="feat-grid"></div>
+            </div>
+
+            <div class="subcard">
+              <h4>Project 3 Flotation Kinetic Model Adapter</h4>
+              <div id="project3Panel"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: INCREMENTAL BATCH RUNNER -->
+    <section id="tab-batch" class="tab-panel">
+      <div class="card">
+        <h2>Incremental Batch Analysis (Streams One Image at a Time to Disk)</h2>
+        <div class="filter-row">
+          <label>Batch:
+            <select id="runBatchSelect">
+              <option value="batch_001">batch_001 (450 imgs)</option>
+              <option value="batch_002">batch_002 (450 imgs)</option>
+              <option value="batch_003">batch_003 (450 imgs)</option>
+              <option value="batch_004">batch_004 (450 imgs)</option>
+              <option value="batch_005">batch_005 (450 imgs)</option>
+            </select>
+          </label>
+          <label>Images to process:
+            <input type="number" id="runBatchLimit" value="45" min="1" max="450" />
+          </label>
+          <button id="runBatchBtn" class="btn primary">Run Incremental Batch</button>
+        </div>
+        <div id="batchStatus" class="muted">Select a batch and click Run Incremental Batch to process images sequentially and save CSV results to outputs/.</div>
+        <div id="batchSummaryKpis" class="kpi-grid" style="display:none; margin-top: 14px;"></div>
+        <div class="table-wrap" style="margin-top: 14px;">
+          <table id="batchResultsTable" style="display:none;">
+            <thead>
+              <tr>
+                <th>ID</th><th>True Cat</th><th>True Stability</th><th>RF Pred</th><th>CNN Pred</th><th>Stability Score</th><th>Air Flow</th><th>D50 (px)</th><th>Novelty</th><th>Drift</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: BENCHMARKS & DRIFT REPORT -->
+    <section id="tab-benchmarks" class="tab-panel">
+      <div class="grid-2">
+        <div class="card">
+          <h2>Dataset Split &amp; Classifier Comparison</h2>
+          <div id="benchDataset">Loading...</div>
+          <hr class="divider" />
+          <h3>Operating-Condition Classifiers (45 Categories)</h3>
+          <div id="benchClassifiers">Loading...</div>
+          <hr class="divider" />
+          <h3>Continuous Regression &amp; Metadata Audit</h3>
+          <div id="benchRegression">Loading...</div>
+        </div>
+        <div class="card">
+          <h2>Held-Out Unsteady Categories: Drift &amp; Novelty Detection</h2>
+          <div id="benchDrift">Loading...</div>
+          <hr class="divider" />
+          <h3>Project 3 Kinetic Model Integration Status</h3>
+          <div id="benchProject3">Loading...</div>
+        </div>
+      </div>
+      <div class="card" style="margin-top: 16px;">
+        <h3>Per-Category Drift Metrics on 17 Held-Out Unstable Categories</h3>
+        <div class="table-wrap">
+          <table id="unsteadyTable">
+            <thead>
+              <tr>
+                <th>Cat ID</th><th>Category</th><th>Mineral</th><th>Air Flow</th><th>Quality</th><th>Samples</th><th>Mean Uncertainty</th><th>Mahalanobis</th><th>Novelty Score</th><th>Drift Flag Rate</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

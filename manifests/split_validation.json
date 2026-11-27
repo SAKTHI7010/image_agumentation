@@ -1,0 +1,23 @@
+{
+  "total_inventory_rows": 2250,
+  "valid_images_expected": 2250,
+  "anomalies_reported": 0,
+  "num_batches": 5,
+  "batch_counts": {
+    "batch_001": 450,
+    "batch_002": 450,
+    "batch_003": 450,
+    "batch_004": 450,
+    "batch_005": 450
+  },
+  "total_rows_across_batch_manifests": 2250,
+  "unique_sources_in_batch_manifests": 2250,
+  "exact_one_to_one_match": true,
+  "batch_manifests": [
+    "manifests/batch_001.csv",
+    "manifests/batch_002.csv",
+    "manifests/batch_003.csv",
+    "manifests/batch_004.csv",
+    "manifests/batch_005.csv"
+  ]
+}

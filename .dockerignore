@@ -1,0 +1,8 @@
+data_original/
+models/cnn_checkpoint_last.pt
+tests/
+__pycache__/
+*.pyc
+.pytest_cache/
+outputs/batch_analysis_*.csv
+.git/

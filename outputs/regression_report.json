@@ -1,0 +1,68 @@
+{
+  "metadata_audit": {
+    "froth_depth_available": false,
+    "froth_depth_note": "ImagesCatalog.xlsx does not contain measured froth depth or concentrate grade. No froth depth labels were fabricated; visual_stability_proxy (0-1) is provided as an unvalidated visual proxy, and plant measurements are required to train/validate froth depth or grade regression.",
+    "air_flow_target_column": "air_flow_l_min",
+    "air_flow_valid_images": 2100,
+    "air_flow_valid_categories": 42,
+    "air_flow_excluded_unknown_images": 150,
+    "air_flow_excluded_categories": [
+      "Category 1",
+      "Category 2",
+      "Category 3"
+    ],
+    "air_flow_setpoints_l_min": [
+      0.0,
+      5.0,
+      10.0,
+      18.0
+    ]
+  },
+  "within_condition_test_metrics": {
+    "num_train": 1461,
+    "num_test": 353,
+    "mae": 2.1424,
+    "rmse": 2.8038,
+    "r2": 0.7707,
+    "per_setpoint": [
+      {
+        "actual_air_flow": 0.0,
+        "count": 7,
+        "pred_mean": 4.7338,
+        "pred_std": 1.5724,
+        "mae": 4.7338
+      },
+      {
+        "actual_air_flow": 5.0,
+        "count": 111,
+        "pred_mean": 7.163,
+        "pred_std": 1.9393,
+        "mae": 2.1802
+      },
+      {
+        "actual_air_flow": 10.0,
+        "count": 86,
+        "pred_mean": 9.8508,
+        "pred_std": 2.042,
+        "mae": 1.4147
+      },
+      {
+        "actual_air_flow": 18.0,
+        "count": 149,
+        "pred_mean": 15.5874,
+        "pred_std": 1.7373,
+        "mae": 2.4126
+      }
+    ]
+  },
+  "category_heldout_5fold_cv_metrics": {
+    "mae": 4.3226,
+    "rmse": 5.1826,
+    "r2": 0.1561
+  },
+  "visual_stability_proxy_summary": {
+    "stable_mean": 0.6842,
+    "unstable_mean": 0.6618,
+    "note": "Unvalidated visual feature proxy computed from bubble uniformity, GLCM homogeneity, entropy, and focus."
+  }
+}
