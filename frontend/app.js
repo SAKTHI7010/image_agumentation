@@ -265,6 +265,20 @@ function renderPrediction(data, previewUrl) {
   `;
 }
 
+async function parseApiResponse(res) {
+  const text = await res.text();
+  let data = {};
+  try {
+    data = text ? JSON.parse(text) : {};
+  } catch {
+    throw new Error(`HTTP ${res.status}: ${text.slice(0, 200)}`);
+  }
+  if (!res.ok) {
+    throw new Error(data.detail || `HTTP ${res.status} error`);
+  }
+  return data;
+}
+
 async function predictLocalSample(sample) {
   try {
     const res = await fetch("/api/predict-local", {
@@ -272,8 +286,7 @@ async function predictLocalSample(sample) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ image_id: sample.image_id }),
     });
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.detail || "Prediction failed");
+    const data = await parseApiResponse(res);
     renderPrediction(data, sample.image_url);
   } catch (err) {
     showError(err.message);
@@ -292,8 +305,7 @@ async function uploadAndPredict() {
   const localUrl = URL.createObjectURL(file);
   try {
     const res = await fetch("/api/predict", { method: "POST", body: form });
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.detail || "Prediction failed");
+    const data = await parseApiResponse(res);
     renderPrediction(data, localUrl);
   } catch (err) {
     showError(err.message);
@@ -311,8 +323,7 @@ async function runBatchAnalyze() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ batch_id: batchId, limit }),
     });
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.detail || "Batch run failed");
+    const data = await parseApiResponse(res);
 
     $("batchStatus").innerHTML = `Completed <strong>${data.processed_count}</strong> images in ${data.elapsed_sec}s. Saved to <code>${data.output_csv_relative_path}</code>.`;
     $("batchSummaryKpis").style.display = "grid";
